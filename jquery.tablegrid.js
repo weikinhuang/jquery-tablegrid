@@ -1,9 +1,11 @@
 /*!
  * jQuery UI TableGrid 0.2.0
  *
- * Copyright 2010, Wei Kin Huang
- * Dual licensed under the MIT or GPL Version 2 licenses.
- * http://jquery.org/license
+ * Copyright (c) 2010 Wei Kin Huang (<a href="http://www.incrementbyone.com">Increment By One</a>)
+ *
+ * Dual licensed under the MIT and GPL licenses:
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.gnu.org/licenses/gpl.html
  *
  * Depends:
  *	jquery.ui.widget.js
