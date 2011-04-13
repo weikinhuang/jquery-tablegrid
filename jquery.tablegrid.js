@@ -1,5 +1,5 @@
 /*!
- * jQuery UI TableGrid 0.2.0
+ * jQuery UI TableGrid 0.3.0
  *
  * Copyright (c) 2010 Wei Kin Huang (<a href="http://www.incrementbyone.com">Increment By One</a>)
  *
@@ -61,6 +61,10 @@
 					self.update();
 					self.updateThrottle = null;
 				}, self.options.delay);
+			}).bind("sort.tablegrid", function() {
+				$.each(Array.prototype.slice.call(arguments, 1), function(i, sort) {
+					self._triggerSort(sort[0], sort[1] || self.options.defaultOrder, i < 0);
+				});
 			});
 		},
 		_setOption : function(key, value) {
