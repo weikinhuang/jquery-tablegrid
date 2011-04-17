@@ -1,5 +1,5 @@
 /*!
- * jQuery UI TableGrid 0.3.0
+ * jQuery UI TableGrid 0.3.1
  *
  * Copyright (c) 2010 Wei Kin Huang (<a href="http://www.incrementbyone.com">Increment By One</a>)
  *
@@ -50,18 +50,19 @@
 			this._loadHeaders();
 
 			this.element.addClass("ui-tablegrid ui-widget ui-helper-reset").bind("update.tablegrid", function() {
-				if (self.options.delay) {
+				if (!self.options.delay) {
 					self.update();
 					return;
 				}
-				if (self.update_throttle) {
+				if (self.updateThrottle) {
 					clearTimeout(self.updateThrottle);
 				}
 				self.updateThrottle = setTimeout(function() {
 					self.update();
 					self.updateThrottle = null;
 				}, self.options.delay);
-			}).bind("sort.tablegrid", function() {
+			}).bind("sortrows.tablegrid", function() {
+				// cannot use sort because juqery ui will break this!
 				$.each(Array.prototype.slice.call(arguments, 1), function(i, sort) {
 					self._triggerSort(sort[0], sort[1] || self.options.defaultOrder, i < 0);
 				});
@@ -76,7 +77,7 @@
 			$.Widget.prototype.destroy.apply(this);
 		},
 		update : function() {
-			if (this.update_throttle) {
+			if (this.updateThrottle) {
 				clearTimeout(this.updateThrottle);
 			}
 			this._setParsers();
