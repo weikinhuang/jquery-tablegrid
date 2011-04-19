@@ -49,9 +49,12 @@
 			this.update();
 			this._loadHeaders();
 
-			this.element.addClass("ui-tablegrid ui-widget ui-helper-reset").bind("update.tablegrid", function() {
+			this.element.addClass("ui-tablegrid ui-widget ui-helper-reset").bind("update.tablegrid", function(e, callback) {
 				if (!self.options.delay) {
 					self.update();
+					if (callback) {
+						callback.call(this);
+					}
 					return;
 				}
 				if (self.updateThrottle) {
@@ -60,6 +63,9 @@
 				self.updateThrottle = setTimeout(function() {
 					self.update();
 					self.updateThrottle = null;
+					if (callback) {
+						callback.call(this);
+					}
 				}, self.options.delay);
 			}).bind("sortrows.tablegrid", function() {
 				// cannot use sort because juqery ui will break this!
