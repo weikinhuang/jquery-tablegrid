@@ -139,6 +139,10 @@
 					p.push(this._getParser(parsers[i]));
 					continue;
 				}
+				if (parsers[i] === false) {
+					p.push(false);
+					continue;
+				}
 				c = this.element[0].tBodies[0].rows[0].cells[i];
 				for (j in $.ui.tablegrid.parsers) {
 					if (j !== "text") {
