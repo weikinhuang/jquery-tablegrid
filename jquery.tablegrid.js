@@ -233,12 +233,21 @@
 				order : this._sanitizeSortOrder(type)
 			});
 			if (this._trigger("start", null, {}) === false) {
-				this._trigger("stop", null, {});
+				this._trigger("stop", null, {
+					sort : []
+				});
 				return;
 			}
 			this._updateHeaderCss(this.sortList);
 			this._updateTableOrder($.ui.tablegrid.sortMulti(this.cache, this.sortList));
-			this._trigger("stop", null, {});
+			this._trigger("stop", null, {
+				sort : $.map(this.sortList, function(o) {
+					return {
+						index : o.index,
+						order : o.order == "asc" ? 1 : -1
+					};
+				})
+			});
 		},
 		_updateHeaderCss : function(sort) {
 			$.each(this.headers, function() {
